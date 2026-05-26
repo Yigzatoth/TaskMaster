@@ -1,0 +1,7 @@
+# Ignorar a pasta de gravações locais
+SaveData/
+
+# Ignorar ficheiros compilados (boas práticas para projetos Eclipse/Java)
+bin/
+*.class
+metadata/
