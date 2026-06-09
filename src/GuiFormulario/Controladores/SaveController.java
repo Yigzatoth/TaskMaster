@@ -41,7 +41,7 @@ public class SaveController implements ActionListener {
             if (serialProcurado != -1) {
                 FichaDados dadosAntigos = SaveManager.carregarDados(serialProcurado);
                 if (dadosAntigos != null) {
-                    FormInjector.injetar(rootPanel, dadosAntigos);
+                	rootPanel.injetarDados(dadosAntigos);
                 } else {
                     JOptionPane.showMessageDialog(rootPanel, 
                         "Serial number " + String.format("%04d", serialProcurado) + " not found.", 
@@ -75,7 +75,7 @@ public class SaveController implements ActionListener {
             return;
         }
 
-        FichaDados dados = FormExtractor.extrair(rootPanel);
+        FichaDados dados = rootPanel.extrairDados();
         dados.numeroSerie = serialFicha;
 
         boolean sucesso = SaveManager.gravarDados(dados, serialFicha);

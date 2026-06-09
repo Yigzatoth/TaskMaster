@@ -3,6 +3,7 @@ package GuiFormulario.Partes.SimNaoRegular;
 import java.awt.CardLayout;
 
 import GuiFormulario.Design.GuiConstants;
+import GuiFormulario.Modelos.FichaDados;
 import GuiFormulario.Partes.ActivityComboLabel;
 import GuiFormulario.appComponents.AppComboBox;
 import GuiFormulario.appComponents.AppPanel;
@@ -62,6 +63,29 @@ public class ActivitySectionPanel extends AppPanel implements GuiConstants {
             revalidate();
             repaint();
         });
+    }
+    
+    public void preencherDadosDeAtividade(FichaDados dados) {
+        if (painelDecisao.isRegular()) {
+            dados.tipoOcorrencia = "Regular";
+            dados.atividade = painelSim.getAtividadeSelecionada();
+        } else {
+            dados.tipoOcorrencia = "Occasional";
+            dados.atividade = painelNao.getAtividadeSelecionada();
+            dados.detalhesOutros = painelNao.getTextoOutros();
+        }
+    }
+
+    public void injetarDadosDeAtividade(FichaDados dados) {
+        boolean ehRegular = "Regular".equalsIgnoreCase(dados.tipoOcorrencia);
+        painelDecisao.getComboRegular().setSelectedItem(ehRegular ? "Yes" : "No");
+
+        if (ehRegular) {
+            painelSim.setAtividadeSelecionada(dados.atividade);
+        } else {
+            painelNao.setAtividadeSelecionada(dados.atividade);
+            painelNao.setTextoOutros(dados.detalhesOutros);
+        }
     }
     
     public ActivityComboLabel getPainelDecisao() {

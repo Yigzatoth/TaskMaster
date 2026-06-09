@@ -19,7 +19,7 @@ public class MainFrame extends JFrame {
         SoundManager.iniciarMusicaFundo("/resources/synthwave.wav");
 
         // 1. Instancia o Design de Fundo
-        AppBackgroundPanel painelFundo = new AppBackgroundPanel("/resources/fundo4.png");
+        AppBackgroundPanel painelFundo = new AppBackgroundPanel("/resources/fundo.png");
         
                 // 2. Instancia o formulário
         RootPanel rootPanel = new RootPanel();

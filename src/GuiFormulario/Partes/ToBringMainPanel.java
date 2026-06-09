@@ -8,6 +8,7 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 
 import GuiFormulario.Design.GuiConstants;
+import GuiFormulario.Modelos.FichaDados;
 import GuiFormulario.Partes.CoisasNecessarias.DiverseStuffPanel;
 import GuiFormulario.Partes.CoisasNecessarias.FixedStuffPanel;
 import GuiFormulario.appComponents.AppLabel;
@@ -41,6 +42,23 @@ public class ToBringMainPanel extends AppPanel implements GuiConstants {
         linhaConteudo.add(painelDiversos);
 
         add(linhaConteudo, BorderLayout.CENTER);
+    }
+    
+ // O painel recebe o objeto e preenche apenas as variáveis que lhe dizem respeito
+    public void preencherDadosDeCoisas(FichaDados dados) {
+        dados.trazAgua = painelFixos.isAguaSelected();
+        dados.trazComida = painelFixos.isComidaSelected();
+        dados.trazBilhetes = painelFixos.isBilhetesSelected();
+        dados.trazId = painelFixos.isIdSelected();
+        dados.coisasDiversas = painelDiversos.getTextoDiversos();
+    }
+
+    public void injetarDadosDeCoisas(FichaDados dados) {
+        painelFixos.setAguaSelected(dados.trazAgua);
+        painelFixos.setComidaSelected(dados.trazComida);
+        painelFixos.setBilhetesSelected(dados.trazBilhetes);
+        painelFixos.setIdSelected(dados.trazId);
+        painelDiversos.setTextoDiversos(dados.coisasDiversas);
     }
     
     public FixedStuffPanel getPainelFixos() {

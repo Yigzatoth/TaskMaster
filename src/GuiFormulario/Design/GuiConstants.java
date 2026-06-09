@@ -17,11 +17,11 @@ public interface GuiConstants {
 
 
     // CORES
-	Color COLOR_PRIMARY = new Color(224, 255, 255);
+	Color COLOR_PRIMARY = new Color(249, 99, 99);
     Color COLOR_BACKGROUND = Color.WHITE;
     
-    Color COLOR_NEON_PURPLE = new Color(157, 0, 255);
-    Color COLOR_NEON_YELLOW = new Color(224, 255, 255); // Amarelo Neon Puro
+    Color COLOR_NEON_PURPLE = new Color(243, 230, 0);
+    Color COLOR_NEON_YELLOW = new Color(249, 99, 99); // Amarelo Neon Puro
     
     // Forçar todo o texto da aplicação a usar o Amarelo Neon
     Color COLOR_TEXT_MAIN = COLOR_NEON_YELLOW;

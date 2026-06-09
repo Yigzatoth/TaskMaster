@@ -5,6 +5,7 @@ import javax.swing.BoxLayout;
 
 import GuiFormulario.Controladores.SaveController;
 import GuiFormulario.Design.GuiConstants;
+import GuiFormulario.Modelos.FichaDados;
 import GuiFormulario.Partes.ButtonSelection;
 import GuiFormulario.Partes.EntryComboBox;
 import GuiFormulario.Partes.HeaderPanel;
@@ -91,6 +92,40 @@ public class RootPanel extends AppPanel implements GuiConstants {
         buttonSelection.associarAcaoApagar(controlador);
         
         controlador.configurarComportamentosDinamicos();
+    }
+    
+    public FichaDados extrairDados() {
+        FichaDados dados = new FichaDados();
+        
+        // O RootPanel extrai o que é simples dos seus componentes diretos
+        dados.tipoEntrada = (String) this.entryComboBox.getComboTipoEntrada().getSelectedItem();
+        dados.dataTarefa = this.taskDateSpinner.getDataTarefa();
+        dados.nomePessoa = this.personTextCombo.getNomePessoa();
+        dados.parentesco = this.personTextCombo.getParentesco();
+        dados.urgencia = this.urgencySlider.getValorUrgencia();
+
+        // Para os painéis complexos, o RootPanel "passa a bola".
+        // Ele envia o objeto 'dados' vazio para os sub-painéis o preencherem.
+        this.activitySectionPanel.preencherDadosDeAtividade(dados);
+        this.toBringMainPanel.preencherDadosDeCoisas(dados);
+
+        return dados;
+    }
+
+    public void injetarDados(FichaDados dados) {
+        if (dados == null) return;
+
+        this.taskDateSpinner.getTaskDateSpinner().setValue(dados.dataTarefa);
+        this.personTextCombo.setNomePessoa(dados.nomePessoa);
+        this.personTextCombo.setParentesco(dados.parentesco);
+        this.urgencySlider.setValorUrgencia(dados.urgencia);
+
+        // Passa a bola aos sub-painéis para eles se preencherem sozinhos
+        this.activitySectionPanel.injetarDadosDeAtividade(dados);
+        this.toBringMainPanel.injetarDadosDeCoisas(dados);
+        
+        this.revalidate(); 
+        this.repaint();
     }
 
     // GETTERS PÚBLICOS: FormExtractor acede aos componentes isolados
